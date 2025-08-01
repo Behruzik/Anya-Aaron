@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Свидетельство о браке</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe9e9, #fff6f6);
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 10px;
+    }
+
+    .book {
+      background: #fff;
+      padding: 30px;
+      border: 2px solid #d77f7f;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #b14444;
+    }
+
+    .page {
+      font-size: 18px;
+      min-height: 150px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px;
+      background-color: #d77f7f;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      min-width: 120px;
+    }
+
+    button:hover {
+      background-color: #b14444;
+    }
+
+    @media (max-width: 400px) {
+      .page {
+        font-size: 16px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="book">
+    <h1>Свидетельство о браке</h1>
+    <div id="page-content" class="page">
+      <!-- Контент будет подгружаться сюда -->
+    </div>
+    <div class="buttons">
+      <button onclick="prevPage()">◀ Назад</button>
+      <button onclick="nextPage()">Вперёд ▶</button>
+    </div>
+  </div>
+
+  <!-- Аудио для листания -->
+  <audio id="flipSound" src="https://www.soundjay.com/misc/sounds/page-turn-01a.mp3" preload="auto"></audio>
+
+  <script>
+    const pages = [
+      "📜 Настоящим подтверждается, что заключён брак между:",
+      "👨 Муж: <strong>Аарн Буранов</strong>",
+      "👰 Жена: <strong>Аня <em> Бондарь</em></strong>",
+      "📅 Дата регистрации: 1 августа 2025 года",
+      "🖋 Регистратор: Подпись и печать ✔",
+      "💍 Любовь подтверждена официально 💌"
+    ];
+
+    let currentPage = 0;
+    const flipSound = document.getElementById("flipSound");
+
+    function showPage() {
+      document.getElementById("page-content").innerHTML = pages[currentPage];
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        flipSound.play();
+        showPage();
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        flipSound.play();
+        showPage();
+      }
+    }
+
+    showPage(); // Показать первую страницу при загрузке
+  </script>
+</body>
+</html>
